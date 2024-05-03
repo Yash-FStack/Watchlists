@@ -4,6 +4,7 @@ import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
@@ -19,24 +20,28 @@ const Navbar = () => {
     return <div className="list-image">{firstChar}</div>;
   };
 
+  const filteredWatchlists = user && user.watchlists ?
+    Object.keys(user.watchlists).filter(listName =>
+      listName.toLowerCase().includes(searchTerm.toLowerCase())
+    ) : [];
+
   return (
     <div className="col-sm-3">
       <button onClick={() => document.body.classList.toggle('collapsed')} className="toggle-btn">
-  <svg width="20" height="20" fill="#fff" className="bi bi-list" viewBox="0 0 16 16">
-    <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-  </svg>
-</button>
-
+        <svg width="20" height="20" fill="#fff" className="bi bi-list" viewBox="0 0 16 16">
+          <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
+      </button>
       <div className="navbar">
         <Link to={"/"}>
-        <div className="nav-heading my-4">Watchlists</div>
+          <div className="nav-heading my-4">Watchlists</div>
         </Link>
         <input
           type="text"
           className="form-control my-4 search-input"
-          placeholder="Search for movies..."
-          value=""
-          onChange=""
+          placeholder="Search Watchlists..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <ul className="nav-links">
           <li>
@@ -55,51 +60,43 @@ const Navbar = () => {
           </li>
         </ul>
         {user && (
-        <div className="heading-sm">My Lists</div>
-)}
+          <div className="heading-sm">My Lists</div>
+        )}
         <ul className="user-watchlists">
-          {user &&
-            user.watchlists &&
-            Object.keys(user.watchlists).map((listName, index) => (
-              <li key={index}>
-                <Link to={`/watchlist/${listName}`}>
-                  {generateImage(listName)}
-                  {listName}
-                </Link>
-              </li>
-            ))}
+          {filteredWatchlists.map((listName, index) => (
+            <li key={index}>
+              <Link to={`/watchlist/${listName}`}>
+                {generateImage(listName)}
+                {listName}
+              </Link>
+            </li>
+          ))}
         </ul>
-        <div
-          className="user-container"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-         <div>
-  <svg
-    width="20"
-    height="20"
-    fill="currentColor"
-    className="bi bi-person-circle mx-2"
-    viewBox="0 0 16 16"
-  >
-    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-    <path
-      fillRule="evenodd"
-      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
-    />
-  </svg>
-  {user ? user.username : "Guest"}
-</div>
-
-{user && (
-  <div className="logout">
-    <button onClick={handleLogout}>Logout</button>
-  </div>
-)}
-{!user && (
-  
-  <Link to={"/login"}>Login</Link>
-)}
-
+        <div className="user-container" onClick={() => setIsExpanded(!isExpanded)}>
+          <div>
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              className="bi bi-person-circle mx-2"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+              <path
+                fillRule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+              />
+            </svg>
+            {user ? user.username : "Guest"}
+          </div>
+          {user && (
+            <div className="logout">
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+          {!user && (
+            <Link to={"/login"}>Login</Link>
+          )}
         </div>
       </div>
     </div>
