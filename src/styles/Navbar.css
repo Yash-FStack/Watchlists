@@ -1,0 +1,131 @@
+.navbar{
+height: 100vh;
+position: relative !important;
+display:block !important;
+padding: 0 40px !important;
+}
+
+.nav-heading{
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    color:red;
+}
+a{
+    text-decoration: none !important;
+}
+.nav-links{
+    list-style: none;
+    width:100%;
+    padding-left: 0;
+    border-bottom: 1px solid #d4d4d4;
+    padding-bottom:30px;
+}
+.nav-links > li > a{
+    background: red;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 20px;
+}
+
+.user-container{
+    position: absolute;
+    bottom: 40px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 280px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+  .search-input {
+    background: url('https://static-00.iconduck.com/assets.00/search-icon-2048x2048-cmujl7en.png') no-repeat; /* Path to your image */
+    background-size : 16px;
+    background-position: 10px;
+    padding-left: 40px !important;
+    height:40px;
+    opacity: 0.5;
+  }
+
+.logout > button{
+    background: transparent;
+    border:hidden;
+    color:red;
+}
+.logout > button:hover{
+    color:#000;
+}
+
+.heading-sm{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.user-watchlists{
+    list-style: none;
+}
+
+.user-watchlists >  li > a{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin:10px auto;
+    color: #000;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.user-watchlists >  li .list-image{
+color:#fff !important;
+background: #000 !important;
+padding: 5px 10px;
+font-weight: 500;
+}
+.toggle-btn{
+    background-color: red;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border: hidden;
+    padding-top: 2px;
+    padding-bottom: 5px;
+    border-radius: 30px;
+    padding-left: 6px;
+    display: none;
+}
+@media only screen and (max-width: 600px) {
+    .navbar{
+        width: 0;
+        overflow: hidden;
+        padding: 0 !important;
+        transition: all 0.3s ease;
+    }
+    body.collapsed .navbar{
+        width: 80%;
+        overflow: unset;
+        background: #fff;
+        z-index: 5;
+        padding:0 40px !important;
+    }
+     .toggle-btn{
+        display: block;
+        z-index: 9;
+    }
+    .user-container{
+        max-width: 220px;
+    }
+}

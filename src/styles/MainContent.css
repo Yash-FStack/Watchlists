@@ -1,0 +1,46 @@
+.hero-section{
+    height: 200px;
+    margin: 10px auto;
+    border: 2px solid red;
+    border-radius: 10px;
+    padding:30px;
+}
+
+.heading-big > span{
+    color: red;
+}
+
+.main-content{
+    max-height: 90vh;
+    overflow-y: auto;
+}
+#button-search{
+    border-radius: 5px;
+}
+.bookmark-btn{
+    background:transparent;
+    border:hidden;
+    position: absolute;
+}
+.bookmark-btn img{
+    position: absolute;
+    left: -11px;
+    top: -7px;
+    border-top-left-radius: 35px;
+}
+.card{
+    box-shadow: 3px 3px 3px #d3d3d3;
+    min-height: 100%;
+}
+@media only screen and (max-width: 600px) {
+    .main-content{
+        position: absolute;
+    }
+    .heading-big{
+        font-size: 25px;
+        text-align: center;
+    }
+    .hero-section{
+        height: 50%;
+    }
+}
