@@ -23,7 +23,13 @@ const Watchlist = () => {
 
       const moviePromises = watchlist.map(async (movie) => {
         try {
-          const movieId = movie.id;
+          let movieId;
+          if(typeof(movie) !== Object){
+           movieId = movie;
+          }
+          else{
+           movieId = movie.id;
+          }
           const response = await fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=dd3df0c`);
           const movieData = await response.json();
           return movieData;
